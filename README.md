@@ -16,6 +16,9 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 npm install
 ```
 
+### Modify .env File
+VITE_API_URL= your API endpoint (http://127.0.0.1:8000/api)
+
 ### Compile and Hot-Reload for Development
 
 ```sh
