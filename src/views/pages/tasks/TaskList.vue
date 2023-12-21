@@ -1,9 +1,11 @@
 <script setup>
 import { useTaskStore } from "@/stores/taskStore.js";
+import { useAuthStore } from "@/stores/authStore.js";
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from 'vue';
 import { useRouter } from "vue-router";
 const taskStore = useTaskStore();
+const authStore = useAuthStore();
 const router = useRouter();
 
 const loadTasks = async () => {
@@ -45,6 +47,22 @@ const markAsCompleteTask = async (id) => {
 }
 
 
+const logOut = async () => {
+    try {
+        alert("hello");
+        const res = await authStore.userLogout();
+        if (res.status == 200) {
+            router.replace({
+                name: 'auth.login'
+            })
+        }
+
+    } catch (error) {
+        console.log(error, "logout er");
+    }
+
+}
+
 onMounted(() => {
     loadTasks();
 });
@@ -52,6 +70,7 @@ onMounted(() => {
 <template>
     <div>
         <a href="/tasks/create">Add New Task</a>
+        <button type="button" style="margin-left: 10px;" @click="logOut">Log out</button>
     </div>
     <div style="background-color: rgb(196, 240, 131); color: green;" v-if="message != ''">
         {{ message }}
@@ -64,6 +83,7 @@ onMounted(() => {
                 <p>{{ task.description }}</p>
                 <p>{{ task.status }}</p>
                 <a :href="`tasks/${task.id}/edit`">Edit this Task</a>
+                <a style="margin-left: 10px; margin-right: 5px;" :href="`tasks/${task.id}/show`">Show this Task</a>
                 <button v-if="!task.isCompleted" style="margin-left: 5px;" @click="markAsCompleteTask(task.id)">Mark As
                     Complete</button>
                 <button style="margin-left: 5px;" @click="deleteTask(task.id)">Delete Task</button>

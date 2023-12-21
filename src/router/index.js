@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import TaskList from '../views/pages/tasks/TaskList.vue'
 import NewTask from '../views/pages/tasks/NewTask.vue'
 import UpdateTask from '../views/pages/tasks/UpdateTask.vue'
+import ViewTask from '../views/pages/tasks/ViewTask.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,12 @@ const router = createRouter({
       path: '/tasks/:id/edit',
       name: 'task.update',
       component: UpdateTask,
+      props: true
+    },
+    {
+      path: '/tasks/:id/show',
+      name: 'task.show',
+      component: ViewTask,
       props: true
     },
     {

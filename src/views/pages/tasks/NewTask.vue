@@ -55,7 +55,7 @@ const submitTask = async () => {
             </div>
 
             <div style="margin-bottom: 10px;">
-                <label for="title">Title *</label>
+                <label for="title">Description *</label>
                 <textarea type="text" id="title" required v-model="taskForm.description"></textarea>
             </div>
             <div style="margin-bottom: 10px;">
